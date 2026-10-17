@@ -142,3 +142,4 @@ allure-results/
 allure-report/
 
 videos/
+/cypress/screenshots
