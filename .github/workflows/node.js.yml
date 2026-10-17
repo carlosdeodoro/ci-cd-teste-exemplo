@@ -3,18 +3,12 @@ name: Teste CI - Cypress
 on:
   push:
     branches: [ "main" ]
-
-permissions:
-  contents: write
+  workflows:dispatch:
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x]
 
     steps:
     - uses: actions/checkout@v4
@@ -25,10 +19,13 @@ jobs:
         cache: 'npm'
     - name: Install dependencies
       run: npm install
+
     - name: Run Cypress tests
       run: npm test  
+
     - name: Gerar relatório Allure
       run: npm run report:generate  
+      
     - name: Publicar relatório GH Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
